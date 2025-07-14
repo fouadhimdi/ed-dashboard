@@ -811,7 +811,26 @@ const RAD = () => {
                               </div>
                               <div className="p-1.5 bg-indigo-100 rounded-lg">
                                 <svg className="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                  <path strokeLinecap="round" strokeLinejoin="round
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                              </div>
+                            </div>
+                            <div className="mt-1 text-[8px] text-gray-500">
+                              الهدف الأمثل
+                              <span className="text-blue-600 font-medium mr-1">أقل من 24 ساعة</span>
+                            </div>
+                          </div>
+                          
+                          {/* وقت الفحص إلى التقرير (MRI منومين) */}
+                          <div className="bg-white rounded-lg shadow-sm p-2 border-r-3 border-blue-500 transform transition-transform hover:scale-105 hover:shadow-md">
+                            <div className="flex justify-between">
+                              <div>
+                                <p className="text-[10px] font-medium text-gray-500">وقت الفحص إلى التقرير (MRI منومين)</p>
+                                <p className="text-sm font-bold text-gray-800 mt-0.5">{kpiValues.radRetakeRate_MRI || '-'}</p>
+                                {getBenchmarkLabel("KPI 2: Scan to Release Time", kpiValues.radRetakeRate_MRI) && (
+                                  <span className="text-[8px] px-1 py-0.5 rounded" 
+                                        style={{ backgroundColor: getColorForValue("KPI 2: Scan to Release Time", kpiValues.radRetakeRate_MRI), color: 'white' }}>
+                                    {getBenchmarkLabel("KPI 2: Scan to Release Time", kpiValues.radRetakeRate_MRI)}
                                   </span>
                                 )}
                               </div>
