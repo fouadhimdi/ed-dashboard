@@ -568,12 +568,12 @@ const RAD = () => {
         <Sidebar menuItems={menuItems} />
 
         {/* المحتوى الرئيسي */}
-        <div className="flex-1 overflow-auto bg-gray-50 mr-72">
+        <div className="flex-1 overflow-auto bg-gray-50 lg:mr-72">
           {/* رأس الصفحة */}
           <div className="sticky top-0 z-10 bg-white shadow-sm border-b border-gray-200">
-            <div className="px-4 py-2 flex justify-between items-center">
-              <div>
-                <h1 className="text-xl font-bold text-gray-800">لوحة تحكم بيانات قسم الأشعة</h1>
+            <div className="px-2 sm:px-4 py-2 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
+              <div className="text-center sm:text-right">
+                <h1 className="text-base sm:text-xl font-bold text-gray-800">لوحة تحكم بيانات قسم الأشعة</h1>
                 {selectedFile && (
                   <div className="text-xs text-gray-500 mt-0.5">
                     {getSelectedFileDate() ? `بيانات ${getSelectedFileDate()}` : selectedFile}
@@ -581,8 +581,8 @@ const RAD = () => {
                 )}
               </div>
               
-              <div className="flex items-center">
-                <div className="relative mr-4">
+              <div className="flex justify-center sm:justify-end">
+                <div className="relative">
                   <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                     <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -591,7 +591,7 @@ const RAD = () => {
                   <select
                     value={selectedFile}
                     onChange={handleFileChange}
-                    className="block w-56 bg-white border border-gray-300 rounded-lg py-1.5 pr-10 pl-3 text-sm text-gray-700 appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200"
+                    className="block w-full sm:w-56 bg-white border border-gray-300 rounded-lg py-1.5 pr-10 pl-3 text-sm text-gray-700 appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200"
                   >
                     <option value="">اختر ملف Excel</option>
                     {excelFiles.map((file, index) => (
@@ -605,12 +605,12 @@ const RAD = () => {
             </div>
           </div>
           
-          <div className="p-4">
+          <div className="p-2 sm:p-4">
             <div className="w-full mx-auto">
               {loading ? (
                 <div className="flex flex-col justify-center items-center h-40 bg-white rounded-lg shadow-sm">
-                  <div className="w-10 h-10 border-3 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
-                  <p className="text-sm text-gray-600 mt-2">جاري تحميل البيانات...</p>
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 border-3 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
+                  <p className="text-xs sm:text-sm text-gray-600 mt-2">جاري تحميل البيانات...</p>
                 </div>
               ) : error ? (
                 <div className="bg-red-50 border-r-4 border-red-500 p-3 rounded-lg shadow-sm">
@@ -628,136 +628,136 @@ const RAD = () => {
               ) : (
                 <div>
                   {/* القسم الرئيسي لبطاقات المؤشرات - تم التعديل لترتيبها في 3 أعمدة حسب الجهاز */}
-                  <div className="bg-white rounded-lg shadow-sm p-4 mb-6">
-                    <h2 className="text-xl font-bold text-gray-800 mb-4 border-r-4 border-indigo-500 pr-2">ملخص مؤشرات الأداء الرئيسية لقسم الأشعة</h2>
+                  <div className="bg-white rounded-lg shadow-sm p-2 sm:p-4 mb-4 sm:mb-6">
+                    <h2 className="text-sm sm:text-xl font-bold text-gray-800 mb-2 sm:mb-4 border-r-4 border-indigo-500 pr-2">ملخص مؤشرات الأداء الرئيسية لقسم الأشعة</h2>
                     
-                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
                       {/* العمود الأول - جهاز CT */}
                       <div>
-                        <div className="mb-3 bg-gradient-to-r from-blue-50 to-blue-100 p-2 rounded-lg border-r-4 border-blue-500">
-                          <h3 className="text-base font-semibold text-blue-800 text-center">أجهزة CT</h3>
+                        <div className="mb-2 sm:mb-3 bg-gradient-to-r from-blue-50 to-blue-100 p-1.5 sm:p-2 rounded-lg border-r-4 border-blue-500">
+                          <h3 className="text-sm sm:text-base font-semibold text-blue-800 text-center">أجهزة CT</h3>
                         </div>
-                        <div className="space-y-3">
+                        <div className="space-y-2 sm:space-y-3">
                           {/* معدل استخدام CT */}
-                          <div className="bg-white rounded-lg shadow-sm p-2 border-r-3 border-green-500 transform transition-transform hover:scale-105 hover:shadow-md">
+                          <div className="bg-white rounded-lg shadow-sm p-1.5 sm:p-2 border-r-3 border-green-500 transform transition-transform hover:scale-105 hover:shadow-md">
                             <div className="flex justify-between">
                               <div>
-                                <p className="text-[10px] font-medium text-gray-500">معدل استخدام CT</p>
-                                <p className="text-sm font-bold text-gray-800 mt-0.5">{kpiValues.radUtilization || '-'}</p>
+                                <p className="text-[9px] sm:text-[10px] font-medium text-gray-500">معدل استخدام CT</p>
+                                <p className="text-xs sm:text-sm font-bold text-gray-800 mt-0.5">{kpiValues.radUtilization || '-'}</p>
                                 {getBenchmarkLabel("KPI 3: Machine Utilization by modality", kpiValues.radUtilization) && (
-                                  <span className="text-[8px] px-1 py-0.5 rounded" 
+                                  <span className="text-[7px] sm:text-[8px] px-1 py-0.5 rounded" 
                                         style={{ backgroundColor: getColorForValue("KPI 3: Machine Utilization by modality", kpiValues.radUtilization), color: 'white' }}>
                                     {getBenchmarkLabel("KPI 3: Machine Utilization by modality", kpiValues.radUtilization)}
                                   </span>
                                 )}
                               </div>
-                              <div className="p-1.5 bg-green-100 rounded-lg">
-                                <svg className="w-4 h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <div className="p-1 sm:p-1.5 bg-green-100 rounded-lg">
+                                <svg className="w-3 h-3 sm:w-4 sm:h-4 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 01-2-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                                 </svg>
                               </div>
                             </div>
-                            <div className="mt-1 text-[8px] text-gray-500">
+                            <div className="mt-1 text-[7px] sm:text-[8px] text-gray-500">
                               الهدف الأمثل
                               <span className="text-blue-600 font-medium mr-1">أكثر من 80%</span>
                             </div>
                           </div>
                           
                           {/* زمن انتظار المنومين (CT) */}
-                          <div className="bg-white rounded-lg shadow-sm p-2 border-r-3 border-indigo-500 transform transition-transform hover:scale-105 hover:shadow-md">
+                          <div className="bg-white rounded-lg shadow-sm p-1.5 sm:p-2 border-r-3 border-indigo-500 transform transition-transform hover:scale-105 hover:shadow-md">
                             <div className="flex justify-between">
                               <div>
-                                <p className="text-[10px] font-medium text-gray-500">زمن انتظار المنومين (CT)</p>
-                                <p className="text-sm font-bold text-gray-800 mt-0.5">{kpiValues.reportTurnaroundTime_CT || '-'}</p>
+                                <p className="text-[9px] sm:text-[10px] font-medium text-gray-500">زمن انتظار المنومين (CT)</p>
+                                <p className="text-xs sm:text-sm font-bold text-gray-800 mt-0.5">{kpiValues.reportTurnaroundTime_CT || '-'}</p>
                                 {getBenchmarkLabel("KPI 1: Order to Scan Time", kpiValues.reportTurnaroundTime_CT) && (
-                                  <span className="text-[8px] px-1 py-0.5 rounded" 
+                                  <span className="text-[7px] sm:text-[8px] px-1 py-0.5 rounded" 
                                         style={{ backgroundColor: getColorForValue("KPI 1: Order to Scan Time", kpiValues.reportTurnaroundTime_CT), color: 'white' }}>
                                     {getBenchmarkLabel("KPI 1: Order to Scan Time", kpiValues.reportTurnaroundTime_CT)}
                                   </span>
                                 )}
                               </div>
-                              <div className="p-1.5 bg-indigo-100 rounded-lg">
-                                <svg className="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <div className="p-1 sm:p-1.5 bg-indigo-100 rounded-lg">
+                                <svg className="w-3 h-3 sm:w-4 sm:h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                               </div>
                             </div>
-                            <div className="mt-1 text-[8px] text-gray-500">
+                            <div className="mt-1 text-[7px] sm:text-[8px] text-gray-500">
                               الهدف الأمثل
                               <span className="text-blue-600 font-medium mr-1">أقل من 24 ساعة</span>
                             </div>
                           </div>
                           
                           {/* وقت الفحص إلى التقرير (CT منومين) */}
-                          <div className="bg-white rounded-lg shadow-sm p-2 border-r-3 border-blue-500 transform transition-transform hover:scale-105 hover:shadow-md">
+                          <div className="bg-white rounded-lg shadow-sm p-1.5 sm:p-2 border-r-3 border-blue-500 transform transition-transform hover:scale-105 hover:shadow-md">
                             <div className="flex justify-between">
                               <div>
-                                <p className="text-[10px] font-medium text-gray-500">وقت الفحص إلى التقرير (CT منومين)</p>
-                                <p className="text-sm font-bold text-gray-800 mt-0.5">{kpiValues.radRetakeRate_CT || '-'}</p>
+                                <p className="text-[9px] sm:text-[10px] font-medium text-gray-500">وقت الفحص إلى التقرير (CT منومين)</p>
+                                <p className="text-xs sm:text-sm font-bold text-gray-800 mt-0.5">{kpiValues.radRetakeRate_CT || '-'}</p>
                                 {getBenchmarkLabel("KPI 2: Scan to Release Time", kpiValues.radRetakeRate_CT) && (
-                                  <span className="text-[8px] px-1 py-0.5 rounded" 
+                                  <span className="text-[7px] sm:text-[8px] px-1 py-0.5 rounded" 
                                         style={{ backgroundColor: getColorForValue("KPI 2: Scan to Release Time", kpiValues.radRetakeRate_CT), color: 'white' }}>
                                     {getBenchmarkLabel("KPI 2: Scan to Release Time", kpiValues.radRetakeRate_CT)}
                                   </span>
                                 )}
                               </div>
-                              <div className="p-1.5 bg-blue-100 rounded-lg">
-                                <svg className="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <div className="p-1 sm:p-1.5 bg-blue-100 rounded-lg">
+                                <svg className="w-3 h-3 sm:w-4 sm:h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                               </div>
                             </div>
-                            <div className="mt-1 text-[8px] text-gray-500">
+                            <div className="mt-1 text-[7px] sm:text-[8px] text-gray-500">
                               الهدف الأمثل
                               <span className="text-blue-600 font-medium mr-1">أقل من 5 ساعات</span>
                             </div>
                           </div>
                           
                           {/* زمن انتظار العيادات (CT) */}
-                          <div className="bg-white rounded-lg shadow-sm p-2 border-r-3 border-blue-500 transform transition-transform hover:scale-105 hover:shadow-md">
+                          <div className="bg-white rounded-lg shadow-sm p-1.5 sm:p-2 border-r-3 border-blue-500 transform transition-transform hover:scale-105 hover:shadow-md">
                             <div className="flex justify-between">
                               <div>
-                                <p className="text-[10px] font-medium text-gray-500">زمن انتظار العيادات (CT)</p>
-                                <p className="text-sm font-bold text-gray-800 mt-0.5">{kpiValues.radExamCompletionTime_CT || '-'}</p>
+                                <p className="text-[9px] sm:text-[10px] font-medium text-gray-500">زمن انتظار العيادات (CT)</p>
+                                <p className="text-xs sm:text-sm font-bold text-gray-800 mt-0.5">{kpiValues.radExamCompletionTime_CT || '-'}</p>
                                 {getBenchmarkLabel("KPI 1: Order to Scan Time", kpiValues.radExamCompletionTime_CT) && (
-                                  <span className="text-[8px] px-1 py-0.5 rounded" 
+                                  <span className="text-[7px] sm:text-[8px] px-1 py-0.5 rounded" 
                                         style={{ backgroundColor: getColorForValue("KPI 1: Order to Scan Time", kpiValues.radExamCompletionTime_CT), color: 'white' }}>
                                     {getBenchmarkLabel("KPI 1: Order to Scan Time", kpiValues.radExamCompletionTime_CT)}
                                   </span>
                                 )}
                               </div>
-                              <div className="p-1.5 bg-blue-100 rounded-lg">
-                                <svg className="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <div className="p-1 sm:p-1.5 bg-blue-100 rounded-lg">
+                                <svg className="w-3 h-3 sm:w-4 sm:h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                               </div>
                             </div>
-                            <div className="mt-1 text-[8px] text-gray-500">
+                            <div className="mt-1 text-[7px] sm:text-[8px] text-gray-500">
                               الهدف الأمثل
                               <span className="text-blue-600 font-medium mr-1">أقل من 24 ساعة</span>
                             </div>
                           </div>
                           
                           {/* وقت الفحص إلى التقرير (CT عيادات) */}
-                          <div className="bg-white rounded-lg shadow-sm p-2 border-r-3 border-purple-500 transform transition-transform hover:scale-105 hover:shadow-md">
+                          <div className="bg-white rounded-lg shadow-sm p-1.5 sm:p-2 border-r-3 border-purple-500 transform transition-transform hover:scale-105 hover:shadow-md">
                             <div className="flex justify-between">
                               <div>
-                                <p className="text-[10px] font-medium text-gray-500">وقت الفحص إلى التقرير (CT عيادات)</p>
-                                <p className="text-sm font-bold text-gray-800 mt-0.5">{kpiValues.patientWaitingTime_CT || '-'}</p>
+                                <p className="text-[9px] sm:text-[10px] font-medium text-gray-500">وقت الفحص إلى التقرير (CT عيادات)</p>
+                                <p className="text-xs sm:text-sm font-bold text-gray-800 mt-0.5">{kpiValues.patientWaitingTime_CT || '-'}</p>
                                 {getBenchmarkLabel("KPI 2: Scan to Release Time", kpiValues.patientWaitingTime_CT) && (
-                                  <span className="text-[8px] px-1 py-0.5 rounded" 
+                                  <span className="text-[7px] sm:text-[8px] px-1 py-0.5 rounded" 
                                         style={{ backgroundColor: getColorForValue("KPI 2: Scan to Release Time", kpiValues.patientWaitingTime_CT), color: 'white' }}>
                                     {getBenchmarkLabel("KPI 2: Scan to Release Time", kpiValues.patientWaitingTime_CT)}
                                   </span>
                                 )}
                               </div>
-                              <div className="p-1.5 bg-purple-100 rounded-lg">
-                                <svg className="w-4 h-4 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <div className="p-1 sm:p-1.5 bg-purple-100 rounded-lg">
+                                <svg className="w-3 h-3 sm:w-4 sm:h-4 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                               </div>
                             </div>
-                            <div className="mt-1 text-[8px] text-gray-500">
+                            <div className="mt-1 text-[7px] sm:text-[8px] text-gray-500">
                               الهدف الأمثل
                               <span className="text-blue-600 font-medium mr-1">أقل من 5 ساعات</span>
                             </div>
@@ -767,130 +767,130 @@ const RAD = () => {
                       
                       {/* العمود الثاني - جهاز MRI */}
                       <div>
-                        <div className="mb-3 bg-gradient-to-r from-purple-50 to-purple-100 p-2 rounded-lg border-r-4 border-purple-500">
-                          <h3 className="text-base font-semibold text-purple-800 text-center">أجهزة MRI</h3>
+                        <div className="mb-2 sm:mb-3 bg-gradient-to-r from-purple-50 to-purple-100 p-1.5 sm:p-2 rounded-lg border-r-4 border-purple-500">
+                          <h3 className="text-sm sm:text-base font-semibold text-purple-800 text-center">أجهزة MRI</h3>
                         </div>
-                        <div className="space-y-3">
+                        <div className="space-y-2 sm:space-y-3">
                           {/* معدل استخدام MRI */}
-                          <div className="bg-white rounded-lg shadow-sm p-2 border-r-3 border-purple-500 transform transition-transform hover:scale-105 hover:shadow-md">
+                          <div className="bg-white rounded-lg shadow-sm p-1.5 sm:p-2 border-r-3 border-purple-500 transform transition-transform hover:scale-105 hover:shadow-md">
                             <div className="flex justify-between">
                               <div>
-                                <p className="text-[10px] font-medium text-gray-500">معدل استخدام MRI</p>
-                                <p className="text-sm font-bold text-gray-800 mt-0.5">{kpiValues.criticalResultsReporting || '-'}</p>
+                                <p className="text-[9px] sm:text-[10px] font-medium text-gray-500">معدل استخدام MRI</p>
+                                <p className="text-xs sm:text-sm font-bold text-gray-800 mt-0.5">{kpiValues.criticalResultsReporting || '-'}</p>
                                 {getBenchmarkLabel("KPI 3: Machine Utilization by modality", kpiValues.criticalResultsReporting) && (
-                                  <span className="text-[8px] px-1 py-0.5 rounded" 
+                                  <span className="text-[7px] sm:text-[8px] px-1 py-0.5 rounded" 
                                         style={{ backgroundColor: getColorForValue("KPI 3: Machine Utilization by modality", kpiValues.criticalResultsReporting), color: 'white' }}>
                                     {getBenchmarkLabel("KPI 3: Machine Utilization by modality", kpiValues.criticalResultsReporting)}
                                   </span>
                                 )}
                               </div>
-                              <div className="p-1.5 bg-purple-100 rounded-lg">
-                                <svg className="w-4 h-4 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <div className="p-1 sm:p-1.5 bg-purple-100 rounded-lg">
+                                <svg className="w-3 h-3 sm:w-4 sm:h-4 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 01-2-2z" />
                                 </svg>
                               </div>
                             </div>
-                            <div className="mt-1 text-[8px] text-gray-500">
+                            <div className="mt-1 text-[7px] sm:text-[8px] text-gray-500">
                               الهدف الأمثل
                               <span className="text-blue-600 font-medium mr-1">أكثر من 80%</span>
                             </div>
                           </div>
                           
-                          {/* زمن انتظار المنومين (MRI) */}
-                          <div className="bg-white rounded-lg shadow-sm p-2 border-r-3 border-indigo-500 transform transition-transform hover:scale-105 hover:shadow-md">
+                          {/* زمن انتظار المنومين (MRI) - والبطاقات الأخرى للـ MRI */}
+                          <div className="bg-white rounded-lg shadow-sm p-1.5 sm:p-2 border-r-3 border-indigo-500 transform transition-transform hover:scale-105 hover:shadow-md">
                             <div className="flex justify-between">
                               <div>
-                                <p className="text-[10px] font-medium text-gray-500">زمن انتظار المنومين (MRI)</p>
-                                <p className="text-sm font-bold text-gray-800 mt-0.5">{kpiValues.reportTurnaroundTime_MRI || '-'}</p>
+                                <p className="text-[9px] sm:text-[10px] font-medium text-gray-500">زمن انتظار المنومين (MRI)</p>
+                                <p className="text-xs sm:text-sm font-bold text-gray-800 mt-0.5">{kpiValues.reportTurnaroundTime_MRI || '-'}</p>
                                 {getBenchmarkLabel("KPI 1: Order to Scan Time", kpiValues.reportTurnaroundTime_MRI) && (
-                                  <span className="text-[8px] px-1 py-0.5 rounded" 
+                                  <span className="text-[7px] sm:text-[8px] px-1 py-0.5 rounded" 
                                         style={{ backgroundColor: getColorForValue("KPI 1: Order to Scan Time", kpiValues.reportTurnaroundTime_MRI), color: 'white' }}>
                                     {getBenchmarkLabel("KPI 1: Order to Scan Time", kpiValues.reportTurnaroundTime_MRI)}
                                   </span>
                                 )}
                               </div>
-                              <div className="p-1.5 bg-indigo-100 rounded-lg">
-                                <svg className="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <div className="p-1 sm:p-1.5 bg-indigo-100 rounded-lg">
+                                <svg className="w-3 h-3 sm:w-4 sm:h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                               </div>
                             </div>
-                            <div className="mt-1 text-[8px] text-gray-500">
+                            <div className="mt-1 text-[7px] sm:text-[8px] text-gray-500">
                               الهدف الأمثل
                               <span className="text-blue-600 font-medium mr-1">أقل من 24 ساعة</span>
                             </div>
                           </div>
                           
-                          {/* وقت الفحص إلى التقرير (MRI منومين) */}
-                          <div className="bg-white rounded-lg shadow-sm p-2 border-r-3 border-blue-500 transform transition-transform hover:scale-105 hover:shadow-md">
+                          {/* باقي بطاقات MRI - وقت الفحص إلى التقرير (MRI منومين) */}
+                          <div className="bg-white rounded-lg shadow-sm p-1.5 sm:p-2 border-r-3 border-blue-500 transform transition-transform hover:scale-105 hover:shadow-md">
                             <div className="flex justify-between">
                               <div>
-                                <p className="text-[10px] font-medium text-gray-500">وقت الفحص إلى التقرير (MRI منومين)</p>
-                                <p className="text-sm font-bold text-gray-800 mt-0.5">{kpiValues.radRetakeRate_MRI || '-'}</p>
+                                <p className="text-[9px] sm:text-[10px] font-medium text-gray-500">وقت الفحص إلى التقرير (MRI منومين)</p>
+                                <p className="text-xs sm:text-sm font-bold text-gray-800 mt-0.5">{kpiValues.radRetakeRate_MRI || '-'}</p>
                                 {getBenchmarkLabel("KPI 2: Scan to Release Time", kpiValues.radRetakeRate_MRI) && (
-                                  <span className="text-[8px] px-1 py-0.5 rounded" 
+                                  <span className="text-[7px] sm:text-[8px] px-1 py-0.5 rounded" 
                                         style={{ backgroundColor: getColorForValue("KPI 2: Scan to Release Time", kpiValues.radRetakeRate_MRI), color: 'white' }}>
                                     {getBenchmarkLabel("KPI 2: Scan to Release Time", kpiValues.radRetakeRate_MRI)}
                                   </span>
                                 )}
                               </div>
-                              <div className="p-1.5 bg-blue-100 rounded-lg">
-                                <svg className="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <div className="p-1 sm:p-1.5 bg-blue-100 rounded-lg">
+                                <svg className="w-3 h-3 sm:w-4 sm:h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                               </div>
                             </div>
-                            <div className="mt-1 text-[8px] text-gray-500">
+                            <div className="mt-1 text-[7px] sm:text-[8px] text-gray-500">
                               الهدف الأمثل
                               <span className="text-blue-600 font-medium mr-1">أقل من 5 ساعات</span>
                             </div>
                           </div>
                           
                           {/* زمن انتظار العيادات (MRI) */}
-                          <div className="bg-white rounded-lg shadow-sm p-2 border-r-3 border-blue-500 transform transition-transform hover:scale-105 hover:shadow-md">
+                          <div className="bg-white rounded-lg shadow-sm p-1.5 sm:p-2 border-r-3 border-blue-500 transform transition-transform hover:scale-105 hover:shadow-md">
                             <div className="flex justify-between">
                               <div>
-                                <p className="text-[10px] font-medium text-gray-500">زمن انتظار العيادات (MRI)</p>
-                                <p className="text-sm font-bold text-gray-800 mt-0.5">{kpiValues.radExamCompletionTime_MRI || '-'}</p>
+                                <p className="text-[9px] sm:text-[10px] font-medium text-gray-500">زمن انتظار العيادات (MRI)</p>
+                                <p className="text-xs sm:text-sm font-bold text-gray-800 mt-0.5">{kpiValues.radExamCompletionTime_MRI || '-'}</p>
                                 {getBenchmarkLabel("KPI 1: Order to Scan Time", kpiValues.radExamCompletionTime_MRI) && (
-                                  <span className="text-[8px] px-1 py-0.5 rounded" 
+                                  <span className="text-[7px] sm:text-[8px] px-1 py-0.5 rounded" 
                                         style={{ backgroundColor: getColorForValue("KPI 1: Order to Scan Time", kpiValues.radExamCompletionTime_MRI), color: 'white' }}>
                                     {getBenchmarkLabel("KPI 1: Order to Scan Time", kpiValues.radExamCompletionTime_MRI)}
                                   </span>
                                 )}
                               </div>
-                              <div className="p-1.5 bg-blue-100 rounded-lg">
-                                <svg className="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <div className="p-1 sm:p-1.5 bg-blue-100 rounded-lg">
+                                <svg className="w-3 h-3 sm:w-4 sm:h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                               </div>
                             </div>
-                            <div className="mt-1 text-[8px] text-gray-500">
+                            <div className="mt-1 text-[7px] sm:text-[8px] text-gray-500">
                               الهدف الأمثل
                               <span className="text-blue-600 font-medium mr-1">أقل من 24 ساعة</span>
                             </div>
                           </div>
                           
                           {/* وقت الفحص إلى التقرير (MRI عيادات) */}
-                          <div className="bg-white rounded-lg shadow-sm p-2 border-r-3 border-purple-500 transform transition-transform hover:scale-105 hover:shadow-md">
+                          <div className="bg-white rounded-lg shadow-sm p-1.5 sm:p-2 border-r-3 border-purple-500 transform transition-transform hover:scale-105 hover:shadow-md">
                             <div className="flex justify-between">
                               <div>
-                                <p className="text-[10px] font-medium text-gray-500">وقت الفحص إلى التقرير (MRI عيادات)</p>
-                                <p className="text-sm font-bold text-gray-800 mt-0.5">{kpiValues.patientWaitingTime_MRI || '-'}</p>
+                                <p className="text-[9px] sm:text-[10px] font-medium text-gray-500">وقت الفحص إلى التقرير (MRI عيادات)</p>
+                                <p className="text-xs sm:text-sm font-bold text-gray-800 mt-0.5">{kpiValues.patientWaitingTime_MRI || '-'}</p>
                                 {getBenchmarkLabel("KPI 2: Scan to Release Time", kpiValues.patientWaitingTime_MRI) && (
-                                  <span className="text-[8px] px-1 py-0.5 rounded" 
+                                  <span className="text-[7px] sm:text-[8px] px-1 py-0.5 rounded" 
                                         style={{ backgroundColor: getColorForValue("KPI 2: Scan to Release Time", kpiValues.patientWaitingTime_MRI), color: 'white' }}>
                                     {getBenchmarkLabel("KPI 2: Scan to Release Time", kpiValues.patientWaitingTime_MRI)}
                                   </span>
                                 )}
                               </div>
-                              <div className="p-1.5 bg-purple-100 rounded-lg">
-                                <svg className="w-4 h-4 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <div className="p-1 sm:p-1.5 bg-purple-100 rounded-lg">
+                                <svg className="w-3 h-3 sm:w-4 sm:h-4 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                               </div>
                             </div>
-                            <div className="mt-1 text-[8px] text-gray-500">
+                            <div className="mt-1 text-[7px] sm:text-[8px] text-gray-500">
                               الهدف الأمثل
                               <span className="text-blue-600 font-medium mr-1">أقل من 5 ساعات</span>
                             </div>
@@ -900,130 +900,130 @@ const RAD = () => {
                       
                       {/* العمود الثالث - جهاز Ultrasound */}
                       <div>
-                        <div className="mb-3 bg-gradient-to-r from-yellow-50 to-yellow-100 p-2 rounded-lg border-r-4 border-yellow-500">
-                          <h3 className="text-base font-semibold text-yellow-800 text-center">أجهزة Ultrasound</h3>
+                        <div className="mb-2 sm:mb-3 bg-gradient-to-r from-yellow-50 to-yellow-100 p-1.5 sm:p-2 rounded-lg border-r-4 border-yellow-500">
+                          <h3 className="text-sm sm:text-base font-semibold text-yellow-800 text-center">أجهزة Ultrasound</h3>
                         </div>
-                        <div className="space-y-3">
+                        <div className="space-y-2 sm:space-y-3">
                           {/* معدل استخدام Ultrasound */}
-                          <div className="bg-white rounded-lg shadow-sm p-2 border-r-3 border-yellow-500 transform transition-transform hover:scale-105 hover:shadow-md">
+                          <div className="bg-white rounded-lg shadow-sm p-1.5 sm:p-2 border-r-3 border-yellow-500 transform transition-transform hover:scale-105 hover:shadow-md">
                             <div className="flex justify-between">
                               <div>
-                                <p className="text-[10px] font-medium text-gray-500">معدل استخدام Ultrasound</p>
-                                <p className="text-sm font-bold text-gray-800 mt-0.5">{kpiValues.schedulingAccuracy || '-'}</p>
+                                <p className="text-[9px] sm:text-[10px] font-medium text-gray-500">معدل استخدام Ultrasound</p>
+                                <p className="text-xs sm:text-sm font-bold text-gray-800 mt-0.5">{kpiValues.schedulingAccuracy || '-'}</p>
                                 {getBenchmarkLabel("KPI 3: Machine Utilization by modality", kpiValues.schedulingAccuracy) && (
-                                  <span className="text-[8px] px-1 py-0.5 rounded" 
+                                  <span className="text-[7px] sm:text-[8px] px-1 py-0.5 rounded" 
                                         style={{ backgroundColor: getColorForValue("KPI 3: Machine Utilization by modality", kpiValues.schedulingAccuracy), color: 'white' }}>
                                     {getBenchmarkLabel("KPI 3: Machine Utilization by modality", kpiValues.schedulingAccuracy)}
                                   </span>
                                 )}
                               </div>
-                              <div className="p-1.5 bg-yellow-100 rounded-lg">
-                                <svg className="w-4 h-4 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <div className="p-1 sm:p-1.5 bg-yellow-100 rounded-lg">
+                                <svg className="w-3 h-3 sm:w-4 sm:h-4 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 01-2-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                                 </svg>
                               </div>
                             </div>
-                            <div className="mt-1 text-[8px] text-gray-500">
+                            <div className="mt-1 text-[7px] sm:text-[8px] text-gray-500">
                               الهدف الأمثل
                               <span className="text-blue-600 font-medium mr-1">أكثر من 80%</span>
                             </div>
                           </div>
                           
-                          {/* زمن انتظار المنومين (Ultrasound) */}
-                          <div className="bg-white rounded-lg shadow-sm p-2 border-r-3 border-indigo-500 transform transition-transform hover:scale-105 hover:shadow-md">
+                          {/* باقي بطاقات Ultrasound */}
+                          <div className="bg-white rounded-lg shadow-sm p-1.5 sm:p-2 border-r-3 border-indigo-500 transform transition-transform hover:scale-105 hover:shadow-md">
                             <div className="flex justify-between">
                               <div>
-                                <p className="text-[10px] font-medium text-gray-500">زمن انتظار المنومين (Ultrasound)</p>
-                                <p className="text-sm font-bold text-gray-800 mt-0.5">{kpiValues.reportTurnaroundTime_US || '-'}</p>
+                                <p className="text-[9px] sm:text-[10px] font-medium text-gray-500">زمن انتظار المنومين (Ultrasound)</p>
+                                <p className="text-xs sm:text-sm font-bold text-gray-800 mt-0.5">{kpiValues.reportTurnaroundTime_US || '-'}</p>
                                 {getBenchmarkLabel("KPI 1: Order to Scan Time", kpiValues.reportTurnaroundTime_US) && (
-                                  <span className="text-[8px] px-1 py-0.5 rounded" 
+                                  <span className="text-[7px] sm:text-[8px] px-1 py-0.5 rounded" 
                                         style={{ backgroundColor: getColorForValue("KPI 1: Order to Scan Time", kpiValues.reportTurnaroundTime_US), color: 'white' }}>
                                     {getBenchmarkLabel("KPI 1: Order to Scan Time", kpiValues.reportTurnaroundTime_US)}
                                   </span>
                                 )}
                               </div>
-                              <div className="p-1.5 bg-indigo-100 rounded-lg">
-                                <svg className="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <div className="p-1 sm:p-1.5 bg-indigo-100 rounded-lg">
+                                <svg className="w-3 h-3 sm:w-4 sm:h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                               </div>
                             </div>
-                            <div className="mt-1 text-[8px] text-gray-500">
+                            <div className="mt-1 text-[7px] sm:text-[8px] text-gray-500">
                               الهدف الأمثل
                               <span className="text-blue-600 font-medium mr-1">أقل من 24 ساعة</span>
                             </div>
                           </div>
                           
                           {/* وقت الفحص إلى التقرير (US منومين) */}
-                          <div className="bg-white rounded-lg shadow-sm p-2 border-r-3 border-blue-500 transform transition-transform hover:scale-105 hover:shadow-md">
+                          <div className="bg-white rounded-lg shadow-sm p-1.5 sm:p-2 border-r-3 border-blue-500 transform transition-transform hover:scale-105 hover:shadow-md">
                             <div className="flex justify-between">
                               <div>
-                                <p className="text-[10px] font-medium text-gray-500">وقت الفحص إلى التقرير (US منومين)</p>
-                                <p className="text-sm font-bold text-gray-800 mt-0.5">{kpiValues.radRetakeRate_US || '-'}</p>
+                                <p className="text-[9px] sm:text-[10px] font-medium text-gray-500">وقت الفحص إلى التقرير (US منومين)</p>
+                                <p className="text-xs sm:text-sm font-bold text-gray-800 mt-0.5">{kpiValues.radRetakeRate_US || '-'}</p>
                                 {getBenchmarkLabel("KPI 2: Scan to Release Time", kpiValues.radRetakeRate_US) && (
-                                  <span className="text-[8px] px-1 py-0.5 rounded" 
+                                  <span className="text-[7px] sm:text-[8px] px-1 py-0.5 rounded" 
                                         style={{ backgroundColor: getColorForValue("KPI 2: Scan to Release Time", kpiValues.radRetakeRate_US), color: 'white' }}>
                                     {getBenchmarkLabel("KPI 2: Scan to Release Time", kpiValues.radRetakeRate_US)}
                                   </span>
                                 )}
                               </div>
-                              <div className="p-1.5 bg-blue-100 rounded-lg">
-                                <svg className="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <div className="p-1 sm:p-1.5 bg-blue-100 rounded-lg">
+                                <svg className="w-3 h-3 sm:w-4 sm:h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                               </div>
                             </div>
-                            <div className="mt-1 text-[8px] text-gray-500">
+                            <div className="mt-1 text-[7px] sm:text-[8px] text-gray-500">
                               الهدف الأمثل
                               <span className="text-blue-600 font-medium mr-1">أقل من 5 ساعات</span>
                             </div>
                           </div>
                           
                           {/* زمن انتظار العيادات (Ultrasound) */}
-                          <div className="bg-white rounded-lg shadow-sm p-2 border-r-3 border-blue-500 transform transition-transform hover:scale-105 hover:shadow-md">
+                          <div className="bg-white rounded-lg shadow-sm p-1.5 sm:p-2 border-r-3 border-blue-500 transform transition-transform hover:scale-105 hover:shadow-md">
                             <div className="flex justify-between">
                               <div>
-                                <p className="text-[10px] font-medium text-gray-500">زمن انتظار العيادات (Ultrasound)</p>
-                                <p className="text-sm font-bold text-gray-800 mt-0.5">{kpiValues.radExamCompletionTime_US || '-'}</p>
+                                <p className="text-[9px] sm:text-[10px] font-medium text-gray-500">زمن انتظار العيادات (Ultrasound)</p>
+                                <p className="text-xs sm:text-sm font-bold text-gray-800 mt-0.5">{kpiValues.radExamCompletionTime_US || '-'}</p>
                                 {getBenchmarkLabel("KPI 1: Order to Scan Time", kpiValues.radExamCompletionTime_US) && (
-                                  <span className="text-[8px] px-1 py-0.5 rounded" 
+                                  <span className="text-[7px] sm:text-[8px] px-1 py-0.5 rounded" 
                                         style={{ backgroundColor: getColorForValue("KPI 1: Order to Scan Time", kpiValues.radExamCompletionTime_US), color: 'white' }}>
                                     {getBenchmarkLabel("KPI 1: Order to Scan Time", kpiValues.radExamCompletionTime_US)}
                                   </span>
                                 )}
                               </div>
-                              <div className="p-1.5 bg-blue-100 rounded-lg">
-                                <svg className="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <div className="p-1 sm:p-1.5 bg-blue-100 rounded-lg">
+                                <svg className="w-3 h-3 sm:w-4 sm:h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                               </div>
                             </div>
-                            <div className="mt-1 text-[8px] text-gray-500">
+                            <div className="mt-1 text-[7px] sm:text-[8px] text-gray-500">
                               الهدف الأمثل
                               <span className="text-blue-600 font-medium mr-1">أقل من 24 ساعة</span>
                             </div>
                           </div>
                           
                           {/* وقت الفحص إلى التقرير (US عيادات) */}
-                          <div className="bg-white rounded-lg shadow-sm p-2 border-r-3 border-purple-500 transform transition-transform hover:scale-105 hover:shadow-md">
+                          <div className="bg-white rounded-lg shadow-sm p-1.5 sm:p-2 border-r-3 border-purple-500 transform transition-transform hover:scale-105 hover:shadow-md">
                             <div className="flex justify-between">
                               <div>
-                                <p className="text-[10px] font-medium text-gray-500">وقت الفحص إلى التقرير (US عيادات)</p>
-                                <p className="text-sm font-bold text-gray-800 mt-0.5">{kpiValues.patientWaitingTime_US || '-'}</p>
+                                <p className="text-[9px] sm:text-[10px] font-medium text-gray-500">وقت الفحص إلى التقرير (US عيادات)</p>
+                                <p className="text-xs sm:text-sm font-bold text-gray-800 mt-0.5">{kpiValues.patientWaitingTime_US || '-'}</p>
                                 {getBenchmarkLabel("KPI 2: Scan to Release Time", kpiValues.patientWaitingTime_US) && (
-                                  <span className="text-[8px] px-1 py-0.5 rounded" 
+                                  <span className="text-[7px] sm:text-[8px] px-1 py-0.5 rounded" 
                                         style={{ backgroundColor: getColorForValue("KPI 2: Scan to Release Time", kpiValues.patientWaitingTime_US), color: 'white' }}>
                                     {getBenchmarkLabel("KPI 2: Scan to Release Time", kpiValues.patientWaitingTime_US)}
                                   </span>
                                 )}
                               </div>
-                              <div className="p-1.5 bg-purple-100 rounded-lg">
-                                <svg className="w-4 h-4 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                              <div className="p-1 sm:p-1.5 bg-purple-100 rounded-lg">
+                                <svg className="w-3 h-3 sm:w-4 sm:h-4 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
                               </div>
                             </div>
-                            <div className="mt-1 text-[8px] text-gray-500">
+                            <div className="mt-1 text-[7px] sm:text-[8px] text-gray-500">
                               الهدف الأمثل
                               <span className="text-blue-600 font-medium mr-1">أقل من 5 ساعات</span>
                             </div>
@@ -1033,22 +1033,22 @@ const RAD = () => {
                     </div>
                   </div>
                   
-                  <div className="bg-white rounded-lg shadow-sm p-3 mb-4 mt-4">
-                    <div className="flex justify-center items-center flex-wrap gap-4">
+                  <div className="bg-white rounded-lg shadow-sm p-2 sm:p-3 mb-4 mt-4">
+                    <div className="flex justify-center items-center flex-wrap gap-2 sm:gap-4">
                       <div className="flex items-center">
-                        <div className="w-3 h-3 rounded-full bg-[#0072C6] ml-1"></div>
+                        <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-[#0072C6] ml-1"></div>
                         <span className="text-xs text-gray-600">ممتاز</span>
                       </div>
                       <div className="flex items-center">
-                        <div className="w-3 h-3 rounded-full bg-[#00B050] ml-1"></div>
+                        <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-[#00B050] ml-1"></div>
                         <span className="text-xs text-gray-600">جيد</span>
                       </div>
                       <div className="flex items-center">
-                        <div className="w-3 h-3 rounded-full bg-[#FFC000] ml-1"></div>
+                        <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-[#FFC000] ml-1"></div>
                         <span className="text-xs text-gray-600">يحتاج تحسين</span>
                       </div>
                       <div className="flex items-center">
-                        <div className="w-3 h-3 rounded-full bg-[#C00000] ml-1"></div>
+                        <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-[#C00000] ml-1"></div>
                         <span className="text-xs text-gray-600">غير مقبول</span>
                       </div>
                     </div>
@@ -1057,7 +1057,7 @@ const RAD = () => {
               )}
               
               {/* حقوق الملكية */}
-              <div className="mt-4 text-center text-xs text-gray-500">
+              <div className="mt-4 text-center text-[10px] sm:text-xs text-gray-500">
                 <p>© {String(new Date().getFullYear())} قسم الأشعة - مستشفى شرق جدة - جميع الحقوق محفوظة</p>
               </div>
             </div>

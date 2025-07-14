@@ -549,7 +549,7 @@ const OR = () => {
         const headers = ['KPI', 'القيمة', 'KPI', 'القيمة'];
         const row1 = [kpiHeaders[0], kpis.electiveOrUtilization, kpiHeaders[1], kpis.surgicalCancellationRate];
         const row2 = [kpiHeaders[2], kpis.electiveSurgeries, kpiHeaders[3], kpis.admToSurgDays];
-        const row3 = [kpiHeaders[4], kpis.totalDaySurgery, kpiHeaders[5], kpis.unplannedAdmission];
+        const row3 = [kpiHeaders[4], kpis.totalDaySurgery, kpiHeaders[5], kpiValues.unplannedAdmission];
         const row4 = [kpiHeaders[6], kpis.daySurgeryCancellation, kpiHeaders[7], kpiValues.daySurgeryConversionToAdm];
         
         setTableData({
@@ -590,12 +590,12 @@ const OR = () => {
         <Sidebar />
 
         {/* المحتوى الرئيسي */}
-        <div className="flex-1 overflow-auto bg-gray-50 mr-72">
+        <div className="flex-1 overflow-auto bg-gray-50 lg:mr-72">
           {/* رأس الصفحة */}
           <div className="sticky top-0 z-10 bg-white shadow-sm border-b border-gray-200">
-            <div className="px-4 py-2 flex justify-between items-center">
-              <div>
-                <h1 className="text-xl font-bold text-gray-800">تحليل مؤشرات الأداء الرئيسية</h1>
+            <div className="px-2 sm:px-4 py-2 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
+              <div className="text-center sm:text-right">
+                <h1 className="text-base sm:text-xl font-bold text-gray-800">تحليل مؤشرات الأداء الرئيسية</h1>
                 {selectedFile && (
                   <div className="text-xs text-gray-500 mt-0.5">
                     {getSelectedFileDate() ? `بيانات ${getSelectedFileDate()}` : selectedFile}
@@ -603,8 +603,8 @@ const OR = () => {
                 )}
               </div>
               
-              <div className="flex items-center">
-                <div className="relative mr-4">
+              <div className="flex justify-center sm:justify-end">
+                <div className="relative">
                   <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                     <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -613,7 +613,7 @@ const OR = () => {
                   <select
                     value={selectedFile}
                     onChange={(e) => setSelectedFile(e.target.value)}
-                    className="block w-56 bg-white border border-gray-300 rounded-lg py-1.5 pr-10 pl-3 text-sm text-gray-700 appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200"
+                    className="block w-full sm:w-56 bg-white border border-gray-300 rounded-lg py-1.5 pr-10 pl-3 text-sm text-gray-700 appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200"
                   >
                     <option value="">اختر ملف Excel</option>
                     {excelFiles.map((file, index) => (
@@ -627,12 +627,12 @@ const OR = () => {
             </div>
           </div>
           
-          <div className="p-4">
+          <div className="p-2 sm:p-4">
             <div className="w-full mx-auto">
               {loading ? (
                 <div className="flex flex-col justify-center items-center h-40 bg-white rounded-lg shadow-sm">
-                  <div className="w-10 h-10 border-3 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
-                  <p className="text-sm text-gray-600 mt-2">جاري تحميل البيانات...</p>
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 border-3 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
+                  <p className="text-xs sm:text-sm text-gray-600 mt-2">جاري تحميل البيانات...</p>
                 </div>
               ) : error ? (
                 <div className="bg-red-50 border-r-4 border-red-500 p-3 rounded-lg shadow-sm">
@@ -650,205 +650,208 @@ const OR = () => {
               ) : (
                 <>
                   {/* بطاقات مؤشرات الأداء الرئيسية */}
-                  <div className="bg-white rounded-lg shadow-sm p-3 mb-6">
-                    <h2 className="text-base font-bold text-gray-700 mb-3 border-r-4 border-indigo-500 pr-2">ملخص مؤشرات الأداء الرئيسية لقسم العمليات</h2>
+                  <div className="bg-white rounded-lg shadow-sm p-2 sm:p-3 mb-4 sm:mb-6">
+                    <h2 className="text-sm sm:text-base font-bold text-gray-700 mb-2 sm:mb-3 border-r-4 border-indigo-500 pr-2">ملخص مؤشرات الأداء الرئيسية لقسم العمليات</h2>
                     
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4">
                       {/* استغلال غرف العمليات */}
-                      <div className="bg-white rounded-lg shadow-sm p-3 border-r-4 border-blue-500 transform transition-transform hover:scale-105 hover:shadow-md">
+                      <div className="bg-white rounded-lg shadow-sm p-2 sm:p-3 border-r-4 border-blue-500 transform transition-transform hover:scale-105 hover:shadow-md">
                         <div className="flex justify-between">
                           <div>
                             <p className="text-xs font-medium text-gray-500">استغلال غرف العمليات الاختيارية</p>
-                            <p className="text-lg font-bold text-gray-800 mt-0.5">{kpiValues.electiveOrUtilization}</p>
+                            <p className="text-base sm:text-lg font-bold text-gray-800 mt-0.5">{kpiValues.electiveOrUtilization}</p>
                             {getBenchmarkLabel("KPI 1. % Elective OR Utilization", kpiValues.electiveOrUtilization) && (
-                              <span className="text-[9px] px-1 py-0.5 rounded" 
+                              <span className="text-[8px] sm:text-[9px] px-1 py-0.5 rounded" 
                                     style={{ backgroundColor: getColorForValue("KPI 1. % Elective OR Utilization", kpiValues.electiveOrUtilization), color: 'white' }}>
                                 {getBenchmarkLabel("KPI 1. % Elective OR Utilization", kpiValues.electiveOrUtilization)}
                               </span>
                             )}
                           </div>
-                          <div className="p-2 bg-blue-100 rounded-lg">
-                            <svg className="w-6 h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <div className="p-1.5 sm:p-2 bg-blue-100 rounded-lg">
+                            <svg className="w-4 h-4 sm:w-6 sm:h-6 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                             </svg>
                           </div>
                         </div>
-                        <div className="mt-2 text-[10px] text-gray-500">
+                        <div className="mt-2 text-[9px] sm:text-[10px] text-gray-500">
                           الهدف الأمثل
                           <span className="text-blue-600 font-medium mr-1">أكثر من 75%</span>
                         </div>
                       </div>
                       
                       {/* معدل إلغاء العمليات */}
-                      <div className="bg-white rounded-lg shadow-sm p-3 border-r-4 border-red-500 transform transition-transform hover:scale-105 hover:shadow-md">
+                      <div className="bg-white rounded-lg shadow-sm p-2 sm:p-3 border-r-4 border-red-500 transform transition-transform hover:scale-105 hover:shadow-md">
                         <div className="flex justify-between">
                           <div>
                             <p className="text-xs font-medium text-gray-500">معدل إلغاء العمليات</p>
-                            <p className="text-lg font-bold text-gray-800 mt-0.5">{kpiValues.surgicalCancellationRate}</p>
+                            <p className="text-base sm:text-lg font-bold text-gray-800 mt-0.5">{kpiValues.surgicalCancellationRate}</p>
                             {getBenchmarkLabel("KPI 2. % Surgical Cancellation Rate", kpiValues.surgicalCancellationRate) && (
-                              <span className="text-[9px] px-1 py-0.5 rounded" 
+                              <span className="text-[8px] sm:text-[9px] px-1 py-0.5 rounded" 
                                     style={{ backgroundColor: getColorForValue("KPI 2. % Surgical Cancellation Rate", kpiValues.surgicalCancellationRate), color: 'white' }}>
                                 {getBenchmarkLabel("KPI 2. % Surgical Cancellation Rate", kpiValues.surgicalCancellationRate)}
                               </span>
                             )}
                           </div>
-                          <div className="p-2 bg-red-100 rounded-lg">
-                            <svg className="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <div className="p-1.5 sm:p-2 bg-red-100 rounded-lg">
+                            <svg className="w-4 h-4 sm:w-6 sm:h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                           </div>
                         </div>
-                        <div className="mt-2 text-[10px] text-gray-500">
+                        <div className="mt-2 text-[9px] sm:text-[10px] text-gray-500">
                           الهدف الأمثل
                           <span className="text-blue-600 font-medium mr-1">أقل من 10%</span>
                         </div>
                       </div>
                       
                       {/* نسبة العمليات الاختيارية */}
-                      <div className="bg-white rounded-lg shadow-sm p-3 border-r-4 border-green-500 transform transition-transform hover:scale-105 hover:shadow-md">
+                      <div className="bg-white rounded-lg shadow-sm p-2 sm:p-3 border-r-4 border-green-500 transform transition-transform hover:scale-105 hover:shadow-md">
                         <div className="flex justify-between">
                           <div>
                             <p className="text-xs font-medium text-gray-500">نسبة العمليات الاختيارية</p>
-                            <p className="text-lg font-bold text-gray-800 mt-0.5">{kpiValues.electiveSurgeries}</p>
+                            <p className="text-base sm:text-lg font-bold text-gray-800 mt-0.5">{kpiValues.electiveSurgeries}</p>
                             {getBenchmarkLabel("KPI 3. % of Elective Surgeries", kpiValues.electiveSurgeries) && (
-                              <span className="text-[9px] px-1 py-0.5 rounded" 
+                              <span className="text-[8px] sm:text-[9px] px-1 py-0.5 rounded" 
                                     style={{ backgroundColor: getColorForValue("KPI 3. % of Elective Surgeries", kpiValues.electiveSurgeries), color: 'white' }}>
                                 {getBenchmarkLabel("KPI 3. % of Elective Surgeries", kpiValues.electiveSurgeries)}
                               </span>
                             )}
                           </div>
-                          <div className="p-2 bg-green-100 rounded-lg">
-                            <svg className="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <div className="p-1.5 sm:p-2 bg-green-100 rounded-lg">
+                            <svg className="w-4 h-4 sm:w-6 sm:h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                           </div>
                         </div>
-                        <div className="mt-2 text-[10px] text-gray-500">
+                        <div className="mt-2 text-[9px] sm:text-[10px] text-gray-500">
                           الهدف الأمثل
                           <span className="text-blue-600 font-medium mr-1">أكثر من 80%</span>
                         </div>
                       </div>
                       
                       {/* متوسط الأيام من الدخول إلى العملية */}
-                      <div className="bg-white rounded-lg shadow-sm p-3 border-r-4 border-yellow-500 transform transition-transform hover:scale-105 hover:shadow-md">
+                      <div className="bg-white rounded-lg shadow-sm p-2 sm:p-3 border-r-4 border-yellow-500 transform transition-transform hover:scale-105 hover:shadow-md">
                         <div className="flex justify-between">
                           <div>
                             <p className="text-xs font-medium text-gray-500">متوسط أيام من الدخول إلى العملية</p>
-                            <p className="text-lg font-bold text-gray-800 mt-0.5">{kpiValues.admToSurgDays}</p>
+                            <p className="text-base sm:text-lg font-bold text-gray-800 mt-0.5">{kpiValues.admToSurgDays}</p>
                             {getBenchmarkLabel("KPI 4. Day of Adm to Surg in Days", kpiValues.admToSurgDays) && (
-                              <span className="text-[9px] px-1 py-0.5 rounded" 
+                              <span className="text-[8px] sm:text-[9px] px-1 py-0.5 rounded" 
                                     style={{ backgroundColor: getColorForValue("KPI 4. Day of Adm to Surg in Days", kpiValues.admToSurgDays), color: 'white' }}>
                                 {getBenchmarkLabel("KPI 4. Day of Adm to Surg in Days", kpiValues.admToSurgDays)}
                               </span>
                             )}
                           </div>
-                          <div className="p-2 bg-yellow-100 rounded-lg">
-                            <svg className="w-6 h-6 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <div className="p-1.5 sm:p-2 bg-yellow-100 rounded-lg">
+                            <svg className="w-4 h-4 sm:w-6 sm:h-6 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                           </div>
                         </div>
-                        <div className="mt-2 text-[10px] text-gray-500">
+                        <div className="mt-2 text-[9px] sm:text-[10px] text-gray-500">
                           الهدف الأمثل
                           <span className="text-blue-600 font-medium mr-1">أقل من 1 يوم</span>
                         </div>
                       </div>
-                      
+                    </div>
+                    
+                    {/* الصف الثاني من البطاقات */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-4 mt-2 sm:mt-4">
                       {/* نسبة جراحات اليوم الواحد */}
-                      <div className="bg-white rounded-lg shadow-sm p-3 border-r-4 border-indigo-500 transform transition-transform hover:scale-105 hover:shadow-md">
+                      <div className="bg-white rounded-lg shadow-sm p-2 sm:p-3 border-r-4 border-indigo-500 transform transition-transform hover:scale-105 hover:shadow-md">
                         <div className="flex justify-between">
                           <div>
                             <p className="text-xs font-medium text-gray-500">نسبة عمليات اليوم الواحد</p>
-                            <p className="text-lg font-bold text-gray-800 mt-0.5">{kpiValues.totalDaySurgery}</p>
+                            <p className="text-base sm:text-lg font-bold text-gray-800 mt-0.5">{kpiValues.totalDaySurgery}</p>
                             {getBenchmarkLabel("KPI 6.1. % Total Day Surgery", kpiValues.totalDaySurgery) && (
-                              <span className="text-[9px] px-1 py-0.5 rounded" 
+                              <span className="text-[8px] sm:text-[9px] px-1 py-0.5 rounded" 
                                     style={{ backgroundColor: getColorForValue("KPI 6.1. % Total Day Surgery", kpiValues.totalDaySurgery), color: 'white' }}>
                                 {getBenchmarkLabel("KPI 6.1. % Total Day Surgery", kpiValues.totalDaySurgery)}
                               </span>
                             )}
                           </div>
-                          <div className="p-2 bg-indigo-100 rounded-lg">
-                            <svg className="w-6 h-6 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <div className="p-1.5 sm:p-2 bg-indigo-100 rounded-lg">
+                            <svg className="w-4 h-4 sm:w-6 sm:h-6 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                           </div>
                         </div>
-                        <div className="mt-2 text-[10px] text-gray-500">
+                        <div className="mt-2 text-[9px] sm:text-[10px] text-gray-500">
                           الهدف الأمثل
                           <span className="text-blue-600 font-medium mr-1">أكثر من 70%</span>
                         </div>
                       </div>
                       
                       {/* معدل إعادة الإدخال غير المخطط */}
-                      <div className="bg-white rounded-lg shadow-sm p-3 border-r-4 border-purple-500 transform transition-transform hover:scale-105 hover:shadow-md">
+                      <div className="bg-white rounded-lg shadow-sm p-2 sm:p-3 border-r-4 border-purple-500 transform transition-transform hover:scale-105 hover:shadow-md">
                         <div className="flex justify-between">
                           <div>
                             <p className="text-xs font-medium text-gray-500">معدل إعادة الإدخال غير المخطط</p>
-                            <p className="text-lg font-bold text-gray-800 mt-0.5">{kpiValues.unplannedAdmission}</p>
+                            <p className="text-base sm:text-lg font-bold text-gray-800 mt-0.5">{kpiValues.unplannedAdmission}</p>
                             {getBenchmarkLabel("KPI 6.2. % Unplanned admission following discharge", kpiValues.unplannedAdmission) && (
-                              <span className="text-[9px] px-1 py-0.5 rounded" 
+                              <span className="text-[8px] sm:text-[9px] px-1 py-0.5 rounded" 
                                     style={{ backgroundColor: getColorForValue("KPI 6.2. % Unplanned admission following discharge", kpiValues.unplannedAdmission), color: 'white' }}>
                                 {getBenchmarkLabel("KPI 6.2. % Unplanned admission following discharge", kpiValues.unplannedAdmission)}
                               </span>
                             )}
                           </div>
-                          <div className="p-2 bg-purple-100 rounded-lg">
-                            <svg className="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <div className="p-1.5 sm:p-2 bg-purple-100 rounded-lg">
+                            <svg className="w-4 h-4 sm:w-6 sm:h-6 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                           </div>
                         </div>
-                        <div className="mt-2 text-[10px] text-gray-500">
+                        <div className="mt-2 text-[9px] sm:text-[10px] text-gray-500">
                           الهدف الأمثل
                           <span className="text-blue-600 font-medium mr-1">أقل من 2%</span>
                         </div>
                       </div>
                       
                       {/* معدل إلغاء عمليات اليوم الواحد */}
-                      <div className="bg-white rounded-lg shadow-sm p-3 border-r-4 border-pink-500 transform transition-transform hover:scale-105 hover:shadow-md">
+                      <div className="bg-white rounded-lg shadow-sm p-2 sm:p-3 border-r-4 border-pink-500 transform transition-transform hover:scale-105 hover:shadow-md">
                         <div className="flex justify-between">
                           <div>
                             <p className="text-xs font-medium text-gray-500">معدل إلغاء عمليات اليوم الواحد</p>
-                            <p className="text-lg font-bold text-gray-800 mt-0.5">{kpiValues.daySurgeryCancellation}</p>
+                            <p className="text-base sm:text-lg font-bold text-gray-800 mt-0.5">{kpiValues.daySurgeryCancellation}</p>
                             {getBenchmarkLabel("KPI 6.3. Day Surgery Cancellation Rate", kpiValues.daySurgeryCancellation) && (
-                              <span className="text-[9px] px-1 py-0.5 rounded" 
+                              <span className="text-[8px] sm:text-[9px] px-1 py-0.5 rounded" 
                                     style={{ backgroundColor: getColorForValue("KPI 6.3. Day Surgery Cancellation Rate", kpiValues.daySurgeryCancellation), color: 'white' }}>
                                 {getBenchmarkLabel("KPI 6.3. Day Surgery Cancellation Rate", kpiValues.daySurgeryCancellation)}
                               </span>
                             )}
                           </div>
-                          <div className="p-2 bg-pink-100 rounded-lg">
-                            <svg className="w-6 h-6 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <div className="p-1.5 sm:p-2 bg-pink-100 rounded-lg">
+                            <svg className="w-4 h-4 sm:w-6 sm:h-6 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                           </div>
                         </div>
-                        <div className="mt-2 text-[10px] text-gray-500">
+                        <div className="mt-2 text-[9px] sm:text-[10px] text-gray-500">
                           الهدف الأمثل
                           <span className="text-blue-600 font-medium mr-1">أقل من 5%</span>
                         </div>
                       </div>
                       
                       {/* معدل تحويل عمليات اليوم الواحد إلى تنويم */}
-                      <div className="bg-white rounded-lg shadow-sm p-3 border-r-4 border-teal-500 transform transition-transform hover:scale-105 hover:shadow-md">
+                      <div className="bg-white rounded-lg shadow-sm p-2 sm:p-3 border-r-4 border-teal-500 transform transition-transform hover:scale-105 hover:shadow-md">
                         <div className="flex justify-between">
                           <div>
                             <p className="text-xs font-medium text-gray-500">معدل تحويل عمليات اليوم الواحد إلى تنويم</p>
-                            <p className="text-lg font-bold text-gray-800 mt-0.5">{kpiValues.daySurgeryConversionToAdm}</p>
+                            <p className="text-base sm:text-lg font-bold text-gray-800 mt-0.5">{kpiValues.daySurgeryConversionToAdm}</p>
                             {getBenchmarkLabel("KPI 6.4. Day Surgery Conversion to Adm", kpiValues.daySurgeryConversionToAdm) && (
-                              <span className="text-[9px] px-1 py-0.5 rounded" 
+                              <span className="text-[8px] sm:text-[9px] px-1 py-0.5 rounded" 
                                     style={{ backgroundColor: getColorForValue("KPI 6.4. Day Surgery Conversion to Adm", kpiValues.daySurgeryConversionToAdm), color: 'white' }}>
                                 {getBenchmarkLabel("KPI 6.4. Day Surgery Conversion to Adm", kpiValues.daySurgeryConversionToAdm)}
                               </span>
                             )}
                           </div>
-                          <div className="p-2 bg-teal-100 rounded-lg">
-                            <svg className="w-6 h-6 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <div className="p-1.5 sm:p-2 bg-teal-100 rounded-lg">
+                            <svg className="w-4 h-4 sm:w-6 sm:h-6 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
                           </div>
                         </div>
-                        <div className="mt-2 text-[10px] text-gray-500">
+                        <div className="mt-2 text-[9px] sm:text-[10px] text-gray-500">
                           الهدف الأمثل
                           <span className="text-blue-600 font-medium mr-1">أقل من 3%</span>
                         </div>
@@ -856,22 +859,22 @@ const OR = () => {
                     </div>
                   </div>
                   
-                  <div className="bg-white rounded-lg shadow-sm p-3 mb-4">
-                    <div className="flex justify-center items-center flex-wrap gap-4">
+                  <div className="bg-white rounded-lg shadow-sm p-2 sm:p-3 mb-4">
+                    <div className="flex justify-center items-center flex-wrap gap-2 sm:gap-4">
                       <div className="flex items-center">
-                        <div className="w-3 h-3 rounded-full bg-[#0072C6] ml-1"></div>
+                        <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-[#0072C6] ml-1"></div>
                         <span className="text-xs text-gray-600">ممتاز</span>
                       </div>
                       <div className="flex items-center">
-                        <div className="w-3 h-3 rounded-full bg-[#00B050] ml-1"></div>
+                        <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-[#00B050] ml-1"></div>
                         <span className="text-xs text-gray-600">جيد</span>
                       </div>
                       <div className="flex items-center">
-                        <div className="w-3 h-3 rounded-full bg-[#FFC000] ml-1"></div>
+                        <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-[#FFC000] ml-1"></div>
                         <span className="text-xs text-gray-600">يحتاج تحسين</span>
                       </div>
                       <div className="flex items-center">
-                        <div className="w-3 h-3 rounded-full bg-[#C00000] ml-1"></div>
+                        <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-[#C00000] ml-1"></div>
                         <span className="text-xs text-gray-600">غير مقبول</span>
                       </div>
                     </div>
@@ -880,7 +883,7 @@ const OR = () => {
               )}
 
               {/* حقوق الملكية */}
-              <div className="mt-2 text-center text-xs text-gray-500">
+              <div className="mt-2 text-center text-[10px] sm:text-xs text-gray-500">
                 <p>© {new Date().toLocaleDateString('ar-SA')} مؤشرات الأداء الرئيسية - جميع الحقوق محفوظة</p>
               </div>
             </div>
