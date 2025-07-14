@@ -333,7 +333,7 @@ const LAB = () => {
           return;
         }
         
-        const response = await fetch('http://localhost:3001/data/LAB');
+        const response = await fetch('http://10.211.228.174:3001/data/LAB');
         if (!isMounted) return;
         
         const files = await response.json();
@@ -378,7 +378,7 @@ const LAB = () => {
       setLoading(true);
       setError('');
       
-      const response = await fetch(`http://localhost:3001/data/LAB/${selectedFile}`, {
+      const response = await fetch(`http://10.211.228.174:3001/data/LAB/${selectedFile}`, {
         signal: abortController.signal
       });
       

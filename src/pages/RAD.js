@@ -151,7 +151,7 @@ const RAD = () => {
   const loadExcelFiles = async () => {
     try {
       // محاولة جلب قائمة الملفات من نقطة النهاية API
-      const response = await fetch('http://localhost:3001/data/RAD');
+      const response = await fetch('http://10.211.228.174:3001/data/RAD');
       const files = await response.json();
       
       // ترتيب الملفات حسب التاريخ من الأقدم إلى الأحدث

@@ -288,7 +288,7 @@ const BB = () => {
     let isMounted = true;
     const fetchExcelFiles = async () => {
       try {
-        const response = await fetch('http://localhost:3001/data/BB');
+        const response = await fetch('http://10.211.228.174:3001/data/BB');
         if (!isMounted) return;
         
         const files = await response.json();
@@ -330,7 +330,7 @@ const BB = () => {
           return;
         }
         
-        const response = await fetch(`http://localhost:3001/data/BB/${selectedFile}`, {
+        const response = await fetch(`http://10.211.228.174:3001/data/BB/${selectedFile}`, {
           signal: abortController.signal
         });
         

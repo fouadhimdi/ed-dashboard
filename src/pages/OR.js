@@ -402,7 +402,7 @@ const OR = () => {
       { 
         key: "daySurgeryConversionToAdm", 
         name: "KPI 6.4. Day Surgery Conversion to Adm", 
-        exactCell: { rowIndex: 1, columnIndex: 35 }
+        exactCell: { rowIndex: 1, columnIndex: 72 }
       }
     ];
     
@@ -471,7 +471,7 @@ const OR = () => {
   useEffect(() => {
     const fetchExcelFiles = async () => {
       try {
-        const response = await fetch('http://localhost:3001/data/OR');
+        const response = await fetch('http://10.211.228.174:3001/data/OR');
         const files = await response.json();
         const excelFiles = files.filter(file => file.endsWith('.xlsx')).sort(compareDates);
         setExcelFiles(excelFiles);
@@ -499,7 +499,7 @@ const OR = () => {
         setLoading(true);
         setError('');
         
-        const response = await fetch(`http://localhost:3001/data/OR/${selectedFile}`);
+        const response = await fetch(`http://10.211.228.174:3001/data/OR/${selectedFile}`);
         const fileContent = await response.arrayBuffer();
         const workbook = XLSX.read(fileContent, { type: 'array' });
         
