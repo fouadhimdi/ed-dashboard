@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback, useRef, lazy, Suspense } from 'react';
 import * as XLSX from 'xlsx';
-import { useNavigate } from 'react-router-dom';
-import { authService } from '../services/authService';
-import { useAuth } from '../context/AuthContext';
 import Sidebar from '../components/layout/Sidebar';
+import config from '../config/api';
 
 // Helper functions to replace excelAnalyticsService
 const generatePlaceholderData = (count, min, max, customLabels = null) => {
@@ -247,7 +245,7 @@ const ED = () => {
   useEffect(() => {
     const fetchExcelFiles = async () => {
       try {
-        const response = await fetch('http://10.211.228.174:3001/data/ED');
+        const response = await fetch(`${config.API_BASE_URL}${config.endpoints.ED}`);
         const files = await response.json();
         const excelFiles = files.filter(file => file.endsWith('.xlsx')).sort(compareDates);
         setExcelFiles(excelFiles);
@@ -274,7 +272,7 @@ const ED = () => {
         setLoading(true);
         setError('');
         
-        const response = await fetch(`http://10.211.228.174:3001/data/ED/${selectedFile}`);
+        const response = await fetch(`${config.API_BASE_URL}${config.endpoints.ED}/${selectedFile}`);
         const fileContent = await response.arrayBuffer();
         const workbook = XLSX.read(fileContent, { type: 'array' });
         

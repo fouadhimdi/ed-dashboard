@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import * as XLSX from 'xlsx';
 import Sidebar from '../components/layout/Sidebar';
-import TimeComparisonChart from '../components/charts/TimeComparisonChart';
-import ComparativeBarChart from '../components/charts/ComparativeBarChart';
+import config from '../config/api';
 
 // دوال بديلة لتوليد بيانات مؤقتة للرسوم البيانية
 const generatePlaceholderData = (count, min, max, customLabels = null) => {
@@ -142,57 +141,75 @@ const RAD = () => {
   // حالة تحميل الرسوم البيانية
   const [chartsLoading, setChartsLoading] = useState(false);
 
-  // تحميل ملفات Excel المتاحة عند تحميل الصفحة
+  // تحميل قائمة الملفات
   useEffect(() => {
-    loadExcelFiles();
-  }, []);
-  
-  // وظيفة لقراءة ملفات Excel المتاحة
-  const loadExcelFiles = async () => {
-    try {
-      // محاولة جلب قائمة الملفات من نقطة النهاية API
-      const response = await fetch('http://10.211.228.174:3001/data/RAD');
-      const files = await response.json();
-      
-      // ترتيب الملفات حسب التاريخ من الأقدم إلى الأحدث
-      const excelFiles = files.filter(file => file.endsWith('.xlsx')).sort(compareDates);
-      
-      setExcelFiles(excelFiles);
-      
-      // اختيار أحدث ملف افتراضيًا
-      if (excelFiles.length > 0) {
-        setSelectedFile(excelFiles[0]);
-        loadExcelData(excelFiles[0]);
-      } else {
-        setError('لا توجد ملفات بيانات متاحة');
-        setLoading(false);
+    const fetchExcelFiles = async () => {
+      try {
+        const response = await fetch(`${config.API_BASE_URL}${config.endpoints.RAD}`);
+        const files = await response.json();
+        const excelFiles = files.filter(file => file.endsWith('.xlsx'));
         
-        // في حالة عدم وجود ملفات، استخدم قائمة ثابتة كبديل
-        const mockFiles = ["RAD-JD-GEN-4-2025-JAN.xlsx", "RAD-JD-GEN-4-2025-FEB.xlsx", "RAD-JD-GEN-4-2025-MAR.xlsx"].sort(compareDates);
-        setExcelFiles(mockFiles);
-        setSelectedFile(mockFiles[0]);
-        loadExcelData(mockFiles[0]);
+        // ترتيب الملفات حسب التاريخ
+        const sortedFiles = excelFiles.sort((a, b) => {
+          const dateA = extractDateFromFileName(a);
+          const dateB = extractDateFromFileName(b);
+          if (!dateA || !dateB) return 0;
+          return dateA - dateB;
+        });
+        
+        setExcelFiles(sortedFiles);
+        if (sortedFiles.length > 0) {
+          setSelectedFile(sortedFiles[0]);
+        }
+      } catch (err) {
+        setError('حدث خطأ في قراءة قائمة الملفات');
+        console.error(err);
       }
-    } catch (err) {
-      console.error('Error loading Excel files:', err);
-      setError('حدث خطأ أثناء تحميل قائمة الملفات');
-      setLoading(false);
-      
-      // في حالة فشل تحميل الملفات، استخدم قائمة ثابتة كبديل
-      const mockFiles = ["RAD-JD-GEN-4-2025-JAN.xlsx", "RAD-JD-GEN-4-2025-FEB.xlsx", "RAD-JD-GEN-4-2025-MAR.xlsx"].sort(compareDates);
-      setExcelFiles(mockFiles);
-      setSelectedFile(mockFiles[0]);
-      loadExcelData(mockFiles[0]);
-    }
-  };
-  
-  // دالة لتحميل بيانات ملف Excel المحدد
+    };
+
+    fetchExcelFiles();
+  }, []);
+
+  // تحميل بيانات Excel
   const loadExcelData = async (filePath) => {
+    if (!filePath) {
+      // إذا لم يتم تحديد ملف، استخدام بيانات افتراضية
+      const defaultKpis = {
+        // CT للمنومين
+        'reportTurnaroundTime_CT': '12:35',
+        'radRetakeRate_CT': '3:28',
+        // MRI للمنومين
+        'reportTurnaroundTime_MRI': '122:06',
+        'radRetakeRate_MRI': '11:47',
+        // Ultrasound للمنومين
+        'reportTurnaroundTime_US': '17:39',
+        'radRetakeRate_US': '5:53',
+        // CT للعيادات
+        'radExamCompletionTime_CT': '181:18',
+        'patientWaitingTime_CT': '20:52',
+        // MRI للعيادات
+        'radExamCompletionTime_MRI': '321:18',
+        'patientWaitingTime_MRI': '42:16',
+        // Ultrasound للعيادات
+        'radExamCompletionTime_US': '238:49',
+        'patientWaitingTime_US': '10:07',
+        // معدلات استخدام الأجهزة
+        'radUtilization': '341%',
+        'criticalResultsReporting': '64%',
+        'schedulingAccuracy': '96%'
+      };
+      
+      setKpiValues(defaultKpis);
+      setLoading(false);
+      return;
+    }
+
     try {
       setLoading(true);
       setError('');
       
-      const response = await fetch(`/data/RAD/${filePath}`);
+      const response = await fetch(`${config.API_BASE_URL}${config.endpoints.RAD}/${filePath}`);
+      
       if (!response.ok) {
         throw new Error('فشل في تحميل بيانات الملف');
       }
@@ -267,8 +284,8 @@ const RAD = () => {
       setError('حدث خطأ أثناء تحميل بيانات الملف');
       setLoading(false);
       
-      // في حالة فشل تحميل البيانات، استخدم بيانات ثابتة من الصورة المرفقة
-      setKpiValues({
+      // في حالة الخطأ، استخدام بيانات افتراضية
+      const defaultKpis = {
         // CT للمنومين
         'reportTurnaroundTime_CT': '12:35',
         'radRetakeRate_CT': '3:28',
@@ -291,7 +308,9 @@ const RAD = () => {
         'radUtilization': '341%',
         'criticalResultsReporting': '64%',
         'schedulingAccuracy': '96%'
-      });
+      };
+      
+      setKpiValues(defaultKpis);
     }
   };
   
@@ -792,26 +811,7 @@ const RAD = () => {
                               </div>
                               <div className="p-1.5 bg-indigo-100 rounded-lg">
                                 <svg className="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
-                              </div>
-                            </div>
-                            <div className="mt-1 text-[8px] text-gray-500">
-                              الهدف الأمثل
-                              <span className="text-blue-600 font-medium mr-1">أقل من 24 ساعة</span>
-                            </div>
-                          </div>
-                          
-                          {/* وقت الفحص إلى التقرير (MRI منومين) */}
-                          <div className="bg-white rounded-lg shadow-sm p-2 border-r-3 border-blue-500 transform transition-transform hover:scale-105 hover:shadow-md">
-                            <div className="flex justify-between">
-                              <div>
-                                <p className="text-[10px] font-medium text-gray-500">وقت الفحص إلى التقرير (MRI منومين)</p>
-                                <p className="text-sm font-bold text-gray-800 mt-0.5">{kpiValues.radRetakeRate_MRI || '-'}</p>
-                                {getBenchmarkLabel("KPI 2: Scan to Release Time", kpiValues.radRetakeRate_MRI) && (
-                                  <span className="text-[8px] px-1 py-0.5 rounded" 
-                                        style={{ backgroundColor: getColorForValue("KPI 2: Scan to Release Time", kpiValues.radRetakeRate_MRI), color: 'white' }}>
-                                    {getBenchmarkLabel("KPI 2: Scan to Release Time", kpiValues.radRetakeRate_MRI)}
+                                  <path strokeLinecap="round" strokeLinejoin="round
                                   </span>
                                 )}
                               </div>

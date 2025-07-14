@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import * as XLSX from 'xlsx';
-import { useAuth } from '../context/AuthContext';
 import Sidebar from '../components/layout/Sidebar';
+import config from '../config/api';
 
 // دوال بديلة لتوليد بيانات مؤقتة للرسوم البيانية
 const generatePlaceholderData = (count, min, max, customLabels = null) => {
@@ -333,7 +333,7 @@ const LAB = () => {
           return;
         }
         
-        const response = await fetch('http://10.211.228.174:3001/data/LAB');
+        const response = await fetch(`${config.API_BASE_URL}${config.endpoints.LAB}`);
         if (!isMounted) return;
         
         const files = await response.json();
@@ -378,7 +378,7 @@ const LAB = () => {
       setLoading(true);
       setError('');
       
-      const response = await fetch(`http://10.211.228.174:3001/data/LAB/${selectedFile}`, {
+      const response = await fetch(`${config.API_BASE_URL}${config.endpoints.LAB}/${selectedFile}`, {
         signal: abortController.signal
       });
       

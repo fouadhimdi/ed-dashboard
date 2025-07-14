@@ -9,7 +9,10 @@ app.use(cors());
 // دالة موحدة للوصول إلى المجلدات وقراءة محتوياتها
 function readDirectoryHandler(dirName) {
   return (req, res) => {
-    const directoryPath = path.join(__dirname, `public/data/${dirName}`);
+    // في بيئة الإنتاج، البيانات ستكون في مجلد build
+    const directoryPath = process.env.NODE_ENV === 'production' 
+      ? path.join(__dirname, `build/data/${dirName}`)
+      : path.join(__dirname, `public/data/${dirName}`);
     
     fs.readdir(directoryPath, (err, files) => {
       if (err) {
@@ -59,7 +62,10 @@ app.get('/data/:folderName/:fileName', (req, res) => {
   }
 
   // إرجاع الملف المطلوب
-  const filePath = path.join(__dirname, `public/data/${folderName}/${fileName}`);
+  const filePath = process.env.NODE_ENV === 'production'
+    ? path.join(__dirname, `build/data/${folderName}/${fileName}`)
+    : path.join(__dirname, `public/data/${folderName}/${fileName}`);
+    
   res.sendFile(filePath, (err) => {
     if (err) {
       res.status(404).send({
@@ -69,10 +75,20 @@ app.get('/data/:folderName/:fileName', (req, res) => {
   });
 });
 
-// تقديم الملفات الثابتة من مجلد public
-app.use(express.static('public'));
+// تقديم الملفات الثابتة من مجلد build في الإنتاج أو public في التطوير
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'build')));
+  
+  // إرجاع index.html للمسارات غير المطابقة (SPA routing)
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build/index.html'));
+  });
+} else {
+  app.use(express.static('public'));
+}
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
+  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
 });

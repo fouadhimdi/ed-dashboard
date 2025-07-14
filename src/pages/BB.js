@@ -3,6 +3,7 @@ import * as XLSX from 'xlsx';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import Sidebar from '../components/layout/Sidebar';
+import config from '../config/api';
 
 // وظيفة لاستخراج التاريخ من اسم الملف
 const extractDateFromFileName = (fileName) => {
@@ -288,7 +289,7 @@ const BB = () => {
     let isMounted = true;
     const fetchExcelFiles = async () => {
       try {
-        const response = await fetch('http://10.211.228.174:3001/data/BB');
+        const response = await fetch(`${config.API_BASE_URL}${config.endpoints.BB}`);
         if (!isMounted) return;
         
         const files = await response.json();
@@ -299,7 +300,7 @@ const BB = () => {
         }
       } catch (err) {
         if (!isMounted) return;
-        setError('حدث خطأ في قراءة قائمة الملفات');
+        setError('Error reading file list');
         console.error(err);
       }
     };
@@ -323,14 +324,14 @@ const BB = () => {
         setLoading(true);
         setError('');
         
-        // التحقق من وجود البيانات في التخزين المؤقت
+        // Check for data in cache
         if (kpiCacheRef.current[selectedFile]) {
           setKpis(kpiCacheRef.current[selectedFile]);
           setLoading(false);
           return;
         }
         
-        const response = await fetch(`http://10.211.228.174:3001/data/BB/${selectedFile}`, {
+        const response = await fetch(`${config.API_BASE_URL}${config.endpoints.BB}/${selectedFile}`, {
           signal: abortController.signal
         });
         
@@ -371,7 +372,7 @@ const BB = () => {
         
         if (isMounted) {
           console.error("خطأ في قراءة البيانات:", err);
-          setError("حدث خطأ أثناء قراءة البيانات: " + err.message);
+          setError("Error while reading data: " + err.message);
           setKpis(defaultValues);
         }
       } finally {

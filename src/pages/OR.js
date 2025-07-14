@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef, lazy, Suspense } from 'react';
 import * as XLSX from 'xlsx';
 import Sidebar from '../components/layout/Sidebar';
+import config from '../config/api';
 
 // دوال بديلة لتوليد بيانات مؤقتة للرسوم البيانية
 const generatePlaceholderData = (count, min, max, customLabels = null) => {
@@ -471,7 +472,7 @@ const OR = () => {
   useEffect(() => {
     const fetchExcelFiles = async () => {
       try {
-        const response = await fetch('http://10.211.228.174:3001/data/OR');
+        const response = await fetch(`${config.API_BASE_URL}${config.endpoints.OR}`);
         const files = await response.json();
         const excelFiles = files.filter(file => file.endsWith('.xlsx')).sort(compareDates);
         setExcelFiles(excelFiles);
@@ -499,7 +500,7 @@ const OR = () => {
         setLoading(true);
         setError('');
         
-        const response = await fetch(`http://10.211.228.174:3001/data/OR/${selectedFile}`);
+        const response = await fetch(`${config.API_BASE_URL}${config.endpoints.OR}/${selectedFile}`);
         const fileContent = await response.arrayBuffer();
         const workbook = XLSX.read(fileContent, { type: 'array' });
         
@@ -549,7 +550,7 @@ const OR = () => {
         const row1 = [kpiHeaders[0], kpis.electiveOrUtilization, kpiHeaders[1], kpis.surgicalCancellationRate];
         const row2 = [kpiHeaders[2], kpis.electiveSurgeries, kpiHeaders[3], kpis.admToSurgDays];
         const row3 = [kpiHeaders[4], kpis.totalDaySurgery, kpiHeaders[5], kpis.unplannedAdmission];
-        const row4 = [kpiHeaders[6], kpis.daySurgeryCancellation, kpiHeaders[7], kpis.daySurgeryConversionToAdm];
+        const row4 = [kpiHeaders[6], kpis.daySurgeryCancellation, kpiHeaders[7], kpiValues.daySurgeryConversionToAdm];
         
         setTableData({
           headers,

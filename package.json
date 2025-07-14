@@ -28,11 +28,12 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && cp -r public/data build/",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "server": "node server.js",
-    "dev": "concurrently \"npm run server\" \"npm run start\""
+    "dev": "concurrently \"npm run server\" \"npm run start\"",
+    "postbuild": "cp -r public/data build/ || xcopy public\\data build\\data\\ /E /I /H /Y"
   },
   "eslintConfig": {
     "extends": [

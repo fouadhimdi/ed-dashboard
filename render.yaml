@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: ed-dashboard
+    env: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm run server
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3001
+    healthCheckPath: /
+    disk:
+      name: data
+      mountPath: /opt/render/project/src/data
+      sizeGB: 1
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
