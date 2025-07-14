@@ -25,3 +25,82 @@ code {
 .standard-text {
   font-family: var(--main-font);
 }
+
+/* تحسينات للجوال */
+@media (max-width: 640px) {
+  /* تحسين التمرير الأفقي للجداول */
+  .table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* تحسين النصوص الصغيرة */
+  .mobile-text {
+    font-size: 0.75rem;
+    line-height: 1.2;
+  }
+  
+  /* تحسين الأزرار للجوال */
+  .mobile-button {
+    min-height: 44px;
+    padding: 12px 16px;
+    font-size: 0.875rem;
+  }
+  
+  /* تحسين المسافات */
+  .mobile-spacing {
+    padding: 0.5rem;
+  }
+}
+
+/* تحسين التمرير للجداول */
+.table-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e0 #f7fafc;
+}
+
+.table-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+.table-scroll::-webkit-scrollbar-track {
+  background: #f7fafc;
+  border-radius: 4px;
+}
+
+.table-scroll::-webkit-scrollbar-thumb {
+  background: #cbd5e0;
+  border-radius: 4px;
+}
+
+.table-scroll::-webkit-scrollbar-thumb:hover {
+  background: #a0aec0;
+}
+
+/* تحسين التركيز للمدخلات */
+.form-input:focus {
+  outline: none;
+  ring: 2px;
+  ring-color: #3b82f6;
+  border-color: #3b82f6;
+}
+
+/* تحسين الانتقالات */
+.smooth-transition {
+  transition: all 0.3s ease-in-out;
+}
+
+/* تحسين الخطوط للشاشات الصغيرة */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.25rem;
+  }
+  
+  h2 {
+    font-size: 1.125rem;
+  }
+  
+  h3 {
+    font-size: 1rem;
+  }
+}

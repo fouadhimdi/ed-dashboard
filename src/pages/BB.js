@@ -439,11 +439,11 @@ const BB = () => {
       <div className="flex h-screen">
         <Sidebar menuItems={menuItems} />
 
-        <div className="flex-1 overflow-auto bg-gray-50 mr-72">
+        <div className="flex-1 overflow-auto bg-gray-50 lg:mr-72">
           <div className="sticky top-0 z-10 bg-white shadow-sm border-b border-gray-200">
-            <div className="px-4 py-2 flex justify-between items-center">
-              <div>
-                <h1 className="text-xl font-bold text-gray-800">لوحة تحكم بيانات بنك الدم</h1>
+            <div className="px-2 sm:px-4 py-2 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2">
+              <div className="text-center sm:text-right">
+                <h1 className="text-base sm:text-xl font-bold text-gray-800">لوحة تحكم بيانات بنك الدم</h1>
                 {selectedFile && (
                   <div className="text-xs text-gray-500 mt-0.5">
                     {getSelectedFileDate() ? `بيانات ${getSelectedFileDate()}` : selectedFile}
@@ -451,7 +451,7 @@ const BB = () => {
                 )}
               </div>
               
-              <div className="flex items-center">
+              <div className="flex justify-center sm:justify-end">
                 <div className="relative">
                   <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
                     <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -461,7 +461,7 @@ const BB = () => {
                   <select
                     value={selectedFile}
                     onChange={(e) => setSelectedFile(e.target.value)}
-                    className="block w-56 bg-white border border-gray-300 rounded-lg py-1.5 pr-10 pl-3 text-sm text-gray-700 appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200"
+                    className="block w-full sm:w-56 bg-white border border-gray-300 rounded-lg py-1.5 pr-10 pl-3 text-sm text-gray-700 appearance-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all duration-200"
                   >
                     <option value="">اختر ملف Excel</option>
                     {excelFiles.map((file, index) => (
@@ -473,12 +473,12 @@ const BB = () => {
             </div>
           </div>
           
-          <div className="p-4">
+          <div className="p-2 sm:p-4">
             <div className="w-full mx-auto">
               {loading ? (
                 <div className="flex justify-center items-center h-40 bg-white rounded-lg shadow-sm">
-                  <div className="w-10 h-10 border-3 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
-                  <p className="text-sm text-gray-600 mr-3">جاري تحميل البيانات...</p>
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 border-3 border-indigo-500 border-t-transparent rounded-full animate-spin"></div>
+                  <p className="text-xs sm:text-sm text-gray-600 mr-3">جاري تحميل البيانات...</p>
                 </div>
               ) : error ? (
                 <div className="bg-red-50 border-r-4 border-red-500 p-3 rounded-lg">
@@ -486,38 +486,38 @@ const BB = () => {
                 </div>
               ) : (
                 <>
-                  <div className="bg-white rounded-lg shadow-sm p-3 mb-6">
-                    <h2 className="text-base font-bold text-gray-700 mb-3 border-r-4 border-red-500 pr-2">ملخص مؤشرات الأداء الرئيسية لبنك الدم</h2>
+                  <div className="bg-white rounded-lg shadow-sm p-2 sm:p-3 mb-4 sm:mb-6">
+                    <h2 className="text-sm sm:text-base font-bold text-gray-700 mb-2 sm:mb-3 border-r-4 border-red-500 pr-2">ملخص مؤشرات الأداء الرئيسية لبنك الدم</h2>
                     
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4">
                       {kpiDefinitions.slice(0, 3).map((kpi) => (
                         <KpiCard key={kpi.id} kpi={kpi} />
                       ))}
                     </div>
                     
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 mt-2 sm:mt-4">
                       {kpiDefinitions.slice(3, 6).map((kpi) => (
                         <KpiCard key={kpi.id} kpi={kpi} />
                       ))}
                     </div>
                   </div>
                   
-                  <div className="bg-white rounded-lg shadow-sm p-3 mb-4">
-                    <div className="flex justify-center items-center flex-wrap gap-4">
+                  <div className="bg-white rounded-lg shadow-sm p-2 sm:p-3 mb-4">
+                    <div className="flex justify-center items-center flex-wrap gap-2 sm:gap-4">
                       <div className="flex items-center">
-                        <div className="w-3 h-3 rounded-full bg-[#0072C6] ml-1"></div>
+                        <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-[#0072C6] ml-1"></div>
                         <span className="text-xs text-gray-600">ممتاز</span>
                       </div>
                       <div className="flex items-center">
-                        <div className="w-3 h-3 rounded-full bg-[#00B050] ml-1"></div>
+                        <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-[#00B050] ml-1"></div>
                         <span className="text-xs text-gray-600">جيد</span>
                       </div>
                       <div className="flex items-center">
-                        <div className="w-3 h-3 rounded-full bg-[#FFC000] ml-1"></div>
+                        <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-[#FFC000] ml-1"></div>
                         <span className="text-xs text-gray-600">يحتاج تحسين</span>
                       </div>
                       <div className="flex items-center">
-                        <div className="w-3 h-3 rounded-full bg-[#C00000] ml-1"></div>
+                        <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-[#C00000] ml-1"></div>
                         <span className="text-xs text-gray-600">غير مقبول</span>
                       </div>
                     </div>
